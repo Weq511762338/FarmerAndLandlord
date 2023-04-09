@@ -1,6 +1,7 @@
 package game;
 
 import domain.User;
+import util.CodeUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,6 +22,7 @@ public class LoginJFrame extends JFrame implements MouseListener {
     JTextField username = new JTextField();
     JPasswordField password = new JPasswordField();
     JTextField code = new JTextField();
+    JDialog dialog = new JDialog();
 
     JLabel rightCode = new JLabel();
 
@@ -74,9 +76,7 @@ public class LoginJFrame extends JFrame implements MouseListener {
         code.setBounds(291, 133, 100, 30);
         this.getContentPane().add(code);
 
-        // TODO: implement this if time permits
-//        String codeStr = CodeUtil.getCode();
-        String codeStr = "abc123";
+        String codeStr = CodeUtil.getCode();
         Font rightCodeFont = new Font(null, 1, 15);
         rightCode.setForeground(Color.RED);
         rightCode.setFont(rightCodeFont);
@@ -106,9 +106,60 @@ public class LoginJFrame extends JFrame implements MouseListener {
         this.getContentPane().add(background);
     }
 
+    public void showJDialog(String msg){
+        dialog = new JDialog();
+        JLabel label = new JLabel(msg);
+        dialog.setSize(200, 200);
+        dialog.setLocationRelativeTo(null);
+        dialog.setTitle(msg);
+        dialog.add(label);
+//        dialog.pack();
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
+        Object obj = e.getSource();
 
+        if(obj == register) {
+            String usernameInput = username.getText();
+            String passwordInput = password.getText();
+            String codeInput = code.getText();
+
+            if (dialog.isVisible()) {
+                dialog.requestFocus();
+                return;
+            }
+
+            if (codeInput.length() == 0) {
+                showJDialog("the code can't be null");
+                return;
+            }
+
+            if (usernameInput.length() == 0 || passwordInput.length() == 0) {
+                showJDialog("username or password can't be null");
+                return;
+            }
+
+            if(!codeInput.equalsIgnoreCase(rightCode.getText())){
+                showJDialog("wrong code");
+                return;
+            }
+
+            User userInfo = new User(usernameInput, passwordInput);
+            if (allUsers.contains(userInfo)) {
+                this.setVisible(false);
+                new GameJFrame();
+            } else {
+                showJDialog("wrong username or password");
+            }
+        } else if(obj == register){
+            System.out.println("user requested to register...");
+        } else if(obj == rightCode){
+            String code = CodeUtil.getCode();
+            rightCode.setText(code);
+        }
     }
 
     @Override
