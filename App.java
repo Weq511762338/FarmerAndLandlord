@@ -1,12 +1,10 @@
 import domain.PokerGame;
+import game.GameJFrame;
 import game.LoginJFrame;
 
 public class App {
     public static void main(String[] args) {
-        /*
-            ♦, ♤, ♡, ♧
-         */
-        new PokerGame();
-        new LoginJFrame();
+//        new LoginJFrame();
+        new GameJFrame();
     }
 }
