@@ -20,9 +20,9 @@ public class Poker extends JLabel implements MouseListener{
         this.front = front;
 
         if(this.front){
-
+            this.showFront();
         }else{
-
+            this.showRear();
         }
 
         this.setSize(71, 96);

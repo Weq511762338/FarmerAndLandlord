@@ -122,7 +122,7 @@ public class LoginJFrame extends JFrame implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         Object obj = e.getSource();
 
-        if(obj == register) {
+        if(obj == login) {
             String usernameInput = username.getText();
             String passwordInput = password.getText();
             String codeInput = code.getText();
