@@ -87,7 +87,7 @@ public class LoginJFrame extends JFrame implements MouseListener {
 
         // login Button
         login.setBounds(123, 310, 128, 47);
-        login.setIcon(new ImageIcon("images/login.png"));
+        login.setIcon(new ImageIcon("image/login/login.png"));
         login.setBorderPainted(false);
         login.setContentAreaFilled(false);
         login.addMouseListener(this);
@@ -95,27 +95,27 @@ public class LoginJFrame extends JFrame implements MouseListener {
 
         // register button
         register.setBounds(256, 310, 128, 47);
-        register.setIcon(new ImageIcon("images/register.png"));
+        register.setIcon(new ImageIcon("image/login/register.png"));
         register.setBorderPainted(false);
         register.setContentAreaFilled(false);
         register.addMouseListener(this);
         this.getContentPane().add(register);
 
-        JLabel background = new JLabel(new ImageIcon("images/background.png"));
+        JLabel background = new JLabel(new ImageIcon("image/login/background.png"));
         background.setBounds(0, 0, 633, 423);
         this.getContentPane().add(background);
     }
 
-    public void showJDialog(String msg){
-        dialog = new JDialog();
-        JLabel label = new JLabel(msg);
-        dialog.setSize(200, 200);
-        dialog.setLocationRelativeTo(null);
-        dialog.setTitle(msg);
-        dialog.add(label);
-//        dialog.pack();
-        dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);
+    public void showJDialog(String content){
+        JDialog jDialog = new JDialog();
+        jDialog.setSize(200, 150);
+        jDialog.setAlwaysOnTop(true);
+        jDialog.setLocationRelativeTo(null);
+        jDialog.setModal(true);
+        JLabel warning = new JLabel(content);
+        warning.setBounds(0, 0, 200, 150);
+        jDialog.getContentPane().add(warning);
+        jDialog.setVisible(true);
     }
 
     @Override
@@ -164,12 +164,20 @@ public class LoginJFrame extends JFrame implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        if(e.getSource() == login){
+            login.setIcon(new ImageIcon("image/login/loginPressed.png"));
+        }else if(e.getSource() == register){
+            register.setIcon(new ImageIcon("image/login/registerPressed.png"));
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        if(e.getSource() == login){
+            login.setIcon(new ImageIcon("image/login/login.png"));
+        }else if(e.getSource() == register){
+            register.setIcon(new ImageIcon("image/login/register.png"));
+        }
     }
 
     @Override
