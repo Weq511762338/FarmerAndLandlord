@@ -39,6 +39,7 @@ public class GameJFrame extends JFrame implements ActionListener {
         setIconImage(Toolkit.getDefaultToolkit().getImage("image/poker/dizhu.png"));
         initJFrame();
         initView();
+
         this.setVisible(true);
 
         initCard();
